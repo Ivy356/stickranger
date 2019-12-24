@@ -1,0 +1,184 @@
+(Note: All time are in frames. Without lag the game runs at 50FPS. Also some parameters may act differently when used on different weapon classes/compos or enemies)
+Weapons:
+v[][0]= Weapon Name
+v[][1]= Weapon LV
+v[][2]= Weapon Buy Cost
+v[][3]= Weapon Small Icon (icon.gif)
+v[][4]= Weapon Large Icon (item.gif)
+v[][5]= For which Class (1=Boxer, 2=Gladiator,...)
+v[][6]= Weapon Colour 
+        (Expressed in the form of AABBCCDD, AA is Alpha in Hex, BBCCDD is RGB in Hex. Then convert AABBCCDD into Dec.)
+v[][7]= (For Angels this controls the frequency that the rings can hit enemies. Purpose unknown for non-Angels)
+v[][8]= Attacking Mode*
+v[][9]= Projectile Splash Switch (1=Yes, 0=No)
+v[][10]= Min AT
+v[][11]= Max AT
+v[][12]= Projectile Count
+v[][13]= Projectile Speed
+v[][14]= Min AGI
+v[][15]= Max AGI
+v[][16]= Range
+v[][17]= Projectile Orientation (0=No Rotation, 1=Follow Direction)
+v[][18]= Projectile Image (mag.gif)
+v[][19]= Projectile Colour
+v[][20]= Projectile Transparency (2=Apply Trasparency, 1=Do Not Apply)
+v[][21]= Projectile Size X-direction
+v[][22]= Projectile Size Y-direction
+v[][23]= Projectile Hitbox Size X-direction
+v[][24]= Projectile Hitbox Size Y-direction
+v[][25]= Appearence Delay for Multiple Projectiles (Time for all projectiles to appear)
+v[][26]= Delay before Projectile is Effective
+v[][27]= Projectile Lifespan
+v[][28]= Projectile Disappearing Effect Time
+v[][29]= Projetile Gravity (0=Ignore Gravity, >0=Falling, <0=Rising)
+v[][30]= Projectile Acceleration
+         (=100:No acceleration, <100:Deceleration, >100:Acceleration, Further from 100: Higher magnitude.)
+v[][31]= Projectile Terrain Piercing Switch (1=Yes, 0=No)
+v[][32]= Projectile Terrain Interaction (0=Disappear, 1=Slide, 2=Reflect)
+v[][33]= Homing Range
+v[][34]= Type
+v[][35]= Type Parameter (Ph or Th: 0, Fi: Burn Rate**, Ic: Slow %, Po and Fr: Time)
+v[][36]= MP/Shooting Cost (MP=0 -> No BAT, MP=-1 -> No MP cost)
+v[][37]= Residue Mode
+v[][38]= Residue Splash Switch
+v[][39]= Bonus AT Min
+v[][40]= Bonus AT Max
+v[][41]= Bonus AT Count 
+v[][42]= Residue Orientation
+v[][43]= Residue Image
+v[][44]= Residue Colour
+v[][45]= Residue Transparency
+v[][46]= Residue Size X-direction
+v[][47]= Residue Size Y-direction
+v[][48]= Residue Hitbox Size X-direction
+v[][49]= Residue Hitbox Size Y-direction
+v[][50]= Appearence Delay for Multiple Residues
+v[][51]= Delay before Residue is Effective
+v[][52]= Residue Lifespan
+v[][53]= Residue Disappearing Effect Time
+v[][54]= Residue Gravity
+v[][55]= Residue Acceleration
+v[][56]= Residue Terrain Piercing Switch 
+v[][57]= Residue Terrain Interaction
+If no residue is required the array can just include all the data from v[][0] to v[][41].
+
+Mod Exclusives:
+v[][58]= Critical Hit Rate (Dual Swords and Hammers only)
+v[][59]= Critical Hit AT Boost (%) (Dual Swords and Hammers only)
+v[][60]= In-bound Gold Rush Card Effect Rate (Gloves and Whips only)
+v[][61]= In-bound Vampire's Card Healing multiplier (Swords and Hammers only)
+v[][62]= Knockback Power (Orbs, Hammers and Tomes only)
+v[][63]= In-bound Heal's Card effect Heal Amount (Staves only)
+v[][64]= In-bound ONIGIRI's Card Effect Rate (Whips only)
+v[][65]= Dark Grey Body when equipped, Extra Rings Amount (Rings Only)
+v[][66]= In-bound Soul Effect Attack ID (Dual Swords only)
+v[][67]= BAT=PAT Switch
+v[][68]= Hammer Size Increment. (Hammers only)
+v[][69]= Force PAT Type Physical Switch (Predator Only)
+v[][70]= Warcry AT Aura Power (Predator Only)
+v[][71]= Warcry DF Aura Power (Predator Only)
+v[][72]= In-bound Vampire's Card Base of logarithm (Swords and Hammers only)
+
+Anything beyond v[][72] are undefined.
+
+*See "Random stuff for Coding" for details of available options.
+**Burn Rate: Whether a fire attack can damage enemies in a frame is determined by this constant. The pseudo code is something like this: A random integer from 0-999 inclusive exists. If the random number is greater than the burn number no damage is done. Otherwise the fire can deal damage.
+
+Compo Items
+v[][0]= Compo Item Name
+v[][1]= Compo Item LV
+v[][2]= Compo Item Buy Cost
+v[][3]= Compo Item Small Icon (icon.gif)
+v[][4]= Compo Item Large Icon (item.gif)
+v[][5]= 9
+v[][6]= Compo Item Colour
+v[][7]= Compo Item Effect Code
+v[][8]= Compo Item Effect Parameter 1
+v[][9]= Compo Item Effect Parameter 2
+v[][10]= Description Line 1
+v[][11]= Description Line 2
+
+Mod Exclusives:
+v[][12]= Description Line 3
+v[][13]= Description Line 4
+v[][14]= Description Line 5
+
+Enemies
+D[][0]= Enemy LV
+D[][1]= Enemy Species
+D[][2]= Enemy Head (en.gif)
+D[][3]= Enemy Size
+D[][4]= Enemy Head Colour
+D[][5]= Enemy Body Colour
+D[][6]= Enemy LP
+D[][7]= Attack Mode*
+D[][8]= Projectile Orientation
+D[][9]= Projectile Image (mag.gif)
+D[][10]= Projectile Colour
+D[][11]= Projectile Transparency
+D[][12]= Projectile Size X-direction
+D[][13]= Projectile Size Y-direction
+D[][14]= Projectile Hitbox Size X-direction
+D[][15]= Projectile Hotbox Size Y-direction
+D[][16]= Appearence Delay for Multiple Projectiles 
+D[][17]= Delay before Projectile is Effective
+D[][18]= Projectile Lifespan
+D[][19]= Projectile Disappearing Effect Time
+D[][20]= Projectile Gravity
+D[][21]= Projectile Acceleration
+D[][22]= Projectile Terrain Piercing Switch 
+D[][23]= Projectile Terrain Interaction
+D[][24]= Homing Range
+D[][25]= Projectile Splash Switch
+D[][26]= Min AT
+D[][27]= Max AT
+D[][28]= Projectile Count
+D[][29]= Projectile Speed 
+D[][30]= Min AGI
+D[][31]= AGI Consistency
+D[][32]= Range
+D[][33]= Type
+D[][34]= Type Parameter
+D[][35]= Ph Resistance (-x Damage)
+D[][36]= Fi Resistance (-x% Damage)
+D[][37]= Ic Resistance (-x% Damage, -x% Effect Time) (MOD ONLY: Setting x>100 will only reduce Effect Time by (x-100)% but not any damage)
+D[][38]= Th Resistance (-x% Damage)
+D[][39]= Po Resistance (-x% Effect Time) (setting x as negative will also -x% Poison AT thus increasing both Poison AT and Time for a Poison weakness)
+D[][40]= Fr Resistance (-x% Effect Time)
+D[][41]= Residue Mode
+D[][42]= Residue Orientation
+D[][43]= Residue Image (mag.gif)
+D[][44]= Residue Colour
+D[][45]= Residue Transparency
+D[][46]= Residue Size X-direction
+D[][47]= Residue Size Y-direction
+D[][48]= Residue Hitbox Size X-direction
+D[][49]= Residue Hotbox Size Y-direction
+D[][50]= Residue Lifespan
+D[][51]= Residue Disappearing Effect Time
+D[][52]= Residue Gravity
+D[][53]= Residue Acceleration
+D[][54]= Residue Terrain Piercing Switch 
+D[][55]= Residue Terrain Interaction
+D[][56]= Residue Splash Switch
+D[][57]= Residue Min AT
+D[][58]= Residue Max AT
+D[][59]= Residue Projectile Count 
+D[][60]= Second Attack Switch
+D[][61]= EXP
+D[][62]= Gold
+D[][63]= ID of Drop #1
+D[][64]= Drop Rate of Drop #1
+D[][65]= ID of Drop #2
+D[][66]= Drop Rate of Drop #2
+D[][67]= ID of Drop #3
+D[][68]= Drop Rate of Drop #3
+
+Mod Exclusives:
+D[][69]= ID of Drop #4
+D[][70]= Drop Rate of Drop #4
+D[][71]= ID of Drop #5
+D[][72]= Drop Rate of Drop #5
+D[][73]= Resistance to Attack Type 6 and 7 (Satan's Card/Devil's Card effect) (>=0 blocks Satan's Card, positive X = -X% Devil's Card/Darkness strength)
+
+*See "Random stuff for Coding" for details of available options.

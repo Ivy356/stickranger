@@ -1,0 +1,201 @@
+Weapons
+v[]=[Name, LV, Cost, SmallIcon, BigIcon, ForClass (1-8), Colour**, (purpose unknown), Attack Mode, Splash(1=y,0=n), MinAT, MaxAT, PCount, PSpeed, MinAGI, MaxAGI, Range, POrientation(0=fixed,1=along path,more?), PImage, PColour**, SPTransparency (1=opaque, 2=apply transparency), PSizeX, PSizeY, PHitboxX, PHitboxY, PDelayBtnProj, PDelayBeforeEffective, PLifespan, PDisappearEffectTime, PGravity, PAcceleration*, PPierce (0=n,1=y), PTerrainInteraction (1=Slide,2=Bounce), HomingRange, Type, TypeParameter, MP, ResidueMode (0=none,1=PoisonArrow-like,2=constant,more...), RSplash(1=y,0=n), BATMin, BATMax, BAT Count]
+if there are residues,
+v[]=[...BAT Count, ROrientation, RImage, RColour**, RTransparency, RSizeX, RSizeY, RHitboxX, RHitboxY, RDelayBtnProj, RDelayBeforeEffective, RLifespan, RDisappearEffectTime, RGravity, RAcceleration*, RPierce, RTerrainInteraction]
+
+Compos
+v[]=[Name, LV, Cost, SmallIcon, BigIcon, 9, Colour**, EffectCode, EffectParam1, EffectParam2, DescriptionLine1 (String), DescriptionLine2 (String)]
+
+Enemies
+D[]=[LV, Species, Head, Size, HeadColour**, BodyColour**, LP, ATMode, ATOrientation, ATImage, ATColour**, ATTransparency, ATSizeX, ATSizeY, ATHitboxX, ATHitboxY, ATDelayBtnProj, ATDelayBeforeEffective, ATLifespan, ATDisappearEffectTime, ATGravity, ATAcceleration*, PierceTerrain, TerrainInteraction, HomingRange, Splash, MinAT, MaxAT, ProjCount, ProjSpeed?, MinAGI, AGIConsistency, Range, Type, TypeParameter, PhResist, FiResist, IcResist, ThResist, PoResist, FrResist, ResidueMode, ROrientation?, RImage, RColour**, RTransparency, RSizeX, RSizeY, RHitboxX, RHitboxY, RLifespan, RDisappearEffectTime, RGravity, RAcceleration*, RPierceTerrain, RTerrainInteraction, RSplash, RMinAT, RMaxAT, RProjCount, SecondAttackSwitch, EXP, Gold, Drop1ID, Drop1Rate, Drop2ID, Drop2Rate, Drop3ID, Drop3Rate]
+
+Weapon AT mode
+0  none/melee mode (e.g. Mach Punch)
+1  no movement (but can drop with gravitiy on)
+2  horizontal
+3  aimed straight line (X03 adjusts spread, X closer to 1 -> smaller spread. BUT 102403 = zero spread. X=16 if not specified)
+4  arc (X04 adjusts spread, X=1 -> zero spread. X=(4+Bullet count) if not specified. Speed is "frames taken to reach target position"? and must !=0)
+5  aimed from distance (e.g. Ice Bolt)
+6  around enemy (speed 0 = on enemy, higher speed => greater projectile spread, projectile orientation must =0) 
+7  lightsaber like (outward) (Sword/Dual Sword/Hammer only?)
+8  spawn around range (X08: horizontal range = 20(X-1) centered at target x-position, 108 = Thunder Spear like. X=5 if not specified)
+9  ring formation (9 = on enemy, 109 = on attacker, 1 projectile = random direction projectile)
+10 thunder sabel like (inward?) (Sword/Dual Sword/Hammer only?)
+11 thunder ring like (X11 adjusts spread, X=0 if not specified)
+12 unused, looks like 2?
+
+mod exclusive:
+13 just like 8 but centered at attacker instead of target.
+14 fixed angles above (X14 works like X03)
+15 arc above (X15 works like X04)
+16 like 11 but comes from attacker instead of near target/from ring
+
+Weapon Residue mode
+0  none
+1  immobile (Poison Arrow like)
+2  constant, residue count => production rate
+3  random spread (Flame Arrow like)
+4  spread upwards, wider (Volcano like)
+5  clumped, forward moving (Wave Cannon like)
+6  spread upwards, narrower (Super Volcano like)
+7  equally spread (Ice Spike like)
+8  works like 3 but more even spread in radial direction.
+9  works like 5 but fixed speed. (imagine something like the original velocity vector being normalized)
+
+mod exclusive:
+10 works like 5 but varied projectile speeds
+
+Enemy AT Mode
+0 none
+1 no movement (but can drop with gravitiy on) (multiple projectiles only supported in mod)
+2 horizontal (multiple projectiles only supported in mod)
+3 aimed st line
+4 arc
+5 spawn around range (thunder storm/blizzard like)
+6 fixed angles above (e.g. ice castle boss spear, white roundhead mushroom)
+7 spawning
+8 spawn on target (e.g. HCa Boss Skull)
+9 random target version of AT Mode 3, target can be out of range and/or dead (HCa Boss Laser)
+
+Enemy spawning mode in stages
+1 spawns enemies all over ground
+2 spawns enemies at ground, left side
+3 spawns enemies at ground, middle
+4 spawns enemies at ground, right side
+5 spawns enemies on both air and water
+6 spawns enemies on water only (also the one used for enemies that spawn only when water exists)
+7 spawns enemies at ground, left side, clumped together
+8 spawns enemies at ground, middle, clumped together
+9 spawns enemies at ground, right side, clumped together
+10 spawns enemies on air only 
+11 spawns enemies all over ceiling (useful for overhanging species like Inverted Trees)
+12 spawns enemies on ceiling, left side
+13 spawns enemies on ceiling, middle side
+14 spawns enemies on ceiling, right side 
+
+mod exclusive:
+15 spawns enemies on centre, (almost?) fixed position.
+
+NOTE: An enemy listed earlier in the data array seems to be covered by enemies listed later. e.g. For this Screen Data array [6,2,3,998,1,3,999,1], the enemy with ID 999 covers the enemy with ID 998. This can possibly conceal the enemy with ID 998 if the enemy with ID 999 is a huge enemy (like 9x size).
+
+*Acceleration: 
+**Colour: Expressed in the form of AABBCCDD, AA is Alpha in Hex, BBCCDD is RGB in Hex, then AABBCCDD is converted into Dec.
+
+func yf(): Class SP stuff
+
+ec[a] =SP on LP
+ic[a] =LP
+jc[a] =STR
+kc[a] =DEX
+lc[a] =MAG
+mc[a] =Min AT
+nc[a] =Max AT
+oc[a] =Min AGI
+pc[a] =Max AGI
+qc[a] =Range
+
+Array v[id][]: Weapon and Compo data. Change v=Array(...) when adding items.
+
+function Cg(a,b,d,c): Compo restrictions?
+
+Stage related Arrays
+Array Yf[]: book entry number
+Array Vf[]: weapon availability at shop
+Array Kf[]: Stage name
+Array Ke[]: Book enemy entry
+Array He[][][]: Stage setups
+Array ye[][]: Stage positions
+
+
+Stage effects: search for case XX where XX is ID for a existing stage with that effect.
+
+Add peaceful stage: Find previous ones' ID (e.g. 47 and 77). Search all XX== and XX!= and copy.
+
+Soul addition: Code added in ba.move=function(){var a,b,d,c,e=... , shop stuff, and set new items
+Swordsman addition: Code modified in SP distribution, modified weapons and drops.
+BAT match PAT: Code added in ba.q=function(a,b,d,c), weapon modification.
+Copy class: add new class in title screen, add SP stuff to func wf(), add stuff to ba.move=function(){var a,b,d,c,e=new Of;... and ba.b=function(){var a,b,d,c=new Of..., modify arrays at top?, edit compo restrictions. also func bf?
+Stage addition: Add enemies, Edit Stage related arrays. Include stage name in var Kf.
+Copy Species: add entry in array Vg, Wg, and Qg (hitbox X/Y, knockback resistance), edit Xg.prototype.move, copy and edit Xg.prototype.??, edit Xg.prototype.b and Xg.prototype.M
+
+Enemy Expected AGI minus Minimum AGI for Selected AGI control values
+  10: +84.42
+  15: +59.29
+  20: +45.59
+  25: +36.96
+  30: +31.03
+  50: +18.34
+ 100: +8.86
+ 200: +3.98
+ 250: +2.99
+ 300: +2.32
+ 500: +1.00
+1000: +0
+
+Rockfall
+v[544]=["Rockfall",6,2E4,6,25,4,4286611584,1,208,0,18,24,24,2,120,135,90,1,2,4286611584,1,24,24,16,16,200,8,200,10,50,90,0,0,0,0,0,0,7,0,3,6,3,1,12,4286611584,1,16,16,8,8,0,5,100,5,15,100,0,0];
+
+Rockfall 6 (Magician):
+AT 18-24 x24, AGI 120-135, Range 90, Type Physical, BAT 3-6 x3, Sells for $2500.
+Summons 24 balls which falls down and hit enemies. When they hit an enemy or the terrain 3 pellets fly out from the ball as bonus attacks.
+
+Old Damned Hammer
+v[855]=["Damned Hammer",8,25E3,23,76,11,4286578816,1,109,0,135,180,6,3,80,90,25,1,20,4286578816,1,32,48,32,32,20,10,60,10,0,80,1,0,0,7,0,180,0,0,8,8,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,45,0,0,0,0,0,0];
+
+SE function that should be added at the bottom part of code.
+function SOUND(a){this.m=Array(a);this.max=a;this.l=0}SOUND.prototype.d=function(a){for(var b=0;b<this.max;b++)this.m[b]=new Audio,this.m[b].src=qh+a};SOUND.prototype.play=function(){0<this.m[this.l].currentTime&&(this.m[this.l].currentTime=0);this.m[this.l].play();this.l++;this.l==this.max&&(this.l=0)};
+
+The removed "VS Mode" button on start screen
+sf(H,256,275,"VS MODE",16777215,4283256217);xf(256,275,128,24)&&(yf&&(location.pathname=Ka?"/javagame/ranger/versus.html":"/en/javagame/ranger/versus.html"),L(192,283,320,283,4289331200));
+
+Book enemy max size
+Xg.prototype.M=function(a,b,c,d){var e=D[a][2],g=D[a][4],h=D[a][5],r=W(D[a][Sg],1,4);
+Change 4 in r=W(D[a][Sg],1,4) to larger no.
+
+Species Code
+ 0: Walker
+ 1: Snake
+ 2: Bat
+ 3: Dragon
+ 4: Stickman
+ 5: Tree
+ 6: Wheel
+ 7: Fish
+ 8: Mushroom
+ 9: Eel (Swim)
+10: Spider
+11: Cactus
+12: Zombie
+13: Eel (Fly)
+14: Copter
+15: Bouncer
+16: Germ
+17: Digger
+18: Tree (Inverted)
+
+Mod Only:
+19: Block
+20: Block (Inverted)
+21: UFO
+22: Bouncer (Infinite Range of Sight)
+
+About RNG functions such as B() in the code (for ver17.4, function name are likely changed in newest version):
+This is NOT totally random. To be simple, the game actually generates an array of length 1024 storing numbers 0/1024, 1/1024, ..., 1023/1024. It then selects one of these 1024 values randomly as the random number.
+
+
+
+some removed code for Predator to work
+
+d=Be;d+=(Ob|1)*(d&15|1);d+=(Qb|1)*(d&15|1);for(a=0;2>a;a++)d+=(Kb[a]|1)*(d&15|1);for(a=0;8>a;a++)d+=(Nb[a]|1)*(d&15|1);for(a=0;8>a;a++)d+=(ec[a]|1)*(d&15|1);for(a=0;8>a;a++)d+=(fc[a]|1)*(d&15|1);for(a=0;8>a;a++)d+=(gc[a]|1)*(d&15|1);for(a=0;8>a;a++)d+=(hc[a]|1)*(d&15|1);for(a=0;8>a;a++)d+=(cc[a]|1)*(d&15|1);for(a=0;8>a;a++)d+=(q[a]|1)*(d&15|1);for(a=0;8>a;a++)d+=(dc[a]|1)*(d&15|1);for(a=0;8>a;a++)d+=(ic[a]|1)*(d&15|1);for(a=0;8>a;a++)d+=
+(jc[a]|1)*(d&15|1);for(a=0;8>a;a++)d+=(kc[a]|1)*(d&15|1);for(a=0;8>a;a++)d+=(lc[a]|1)*(d&15|1);for(a=0;8>a;a++)d+=(mc[a]|1)*(d&15|1);for(a=0;8>a;a++)d+=(nc[a]|1)*(d&15|1);for(a=0;8>a;a++)d+=(oc[a]|1)*(d&15|1);for(a=0;8>a;a++)d+=(pc[a]|1)*(d&15|1);for(a=0;8>a;a++)d+=(qc[a]|1)*(d&15|1);for(a=0;a<Ec;a++)d+=(s[a]|1)*(d&15|1);for(a=0;a<Ec;a++)d+=(Ac[a]|1)*(d&15|1);for(a=0;a<Ec;a++)d+=(Bc[a]|1)*(d&15|1);for(a=0;8>a;a++)d+=(xc[a]|1)*(d&15|1);for(a=0;8>a;a++)d+=(yc[a]|1)*(d&15|1);for(a=0;a<ue;a++)d+=(ve[a]|
+1)*(d&15|1);d+=(f|1)*(d&15|1);d+=(Lb[0]|1)*(d&15|1);d+=(Lb[1]|1)*(d&15|1);d+=(Mb[0]|1)*(d&15|1);d+=(Mb[1]|1)*(d&15|1);d!=(Ae^16777215)&&(F=null);
+
+
+Console Stuff
+----------------------------------------------------------------------------------------------
+Generic searcher
+var b=new Array(706);var i=0;for(var a=0;a<706;a++){if(v[a][12]==0){b[i]=a;i++}else{b[i]=0}}b
+var b=new Array(706);var i=0;for(var a=0;a<706;a++,i++){if(v[a][12]==0){b[i]=a}else{b[i]=0}}b
+
+Item ID list generator
+var b="";var i=0;for(var a=0;a<857;a++,i++){if(v[a][5]!=0){b=i+" - "+v[a][0]+" "+v[a][1];console.log(b)}}
